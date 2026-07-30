@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="Human Intelligence Lab — an experimental framework for designing AI that strengthens human thinking."
+  />
+
+  <title>Human Intelligence Lab</title>
+
+  <style>
+    :root {
+      --background: #f3f1eb;
+      --foreground: #111111;
+      --muted: #6d6a64;
+      --line: rgba(17, 17, 17, 0.16);
+      --accent: #ff3b30;
+      --dark: #0c0c0c;
+      --light: #f7f5ef;
+      --max-width: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      color: white;
+      background: var(--accent);
+    }
+
+    .page {
+      width: 100%;
+    }
+
+    .container {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .display {
+      margin: 0;
+      font-size: clamp(54px, 9vw, 150px);
+      font-weight: 500;
+      letter-spacing: -0.075em;
+      line-height: 0.88;
+    }
+
+    .headline {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 92px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+
+    .subheadline {
+      max-width: 760px;
+      margin: 32px 0 0;
+      font-size: clamp(20px, 2.3vw, 34px);
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+    }
+
+    .body-copy {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(18px, 1.5vw, 24px);
+      line-height: 1.5;
+    }
+
+    .nav {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 250ms ease,
+        border-color 250ms ease;
+    }
+
+    .nav.scrolled {
+      border-color: var(--line);
+      background: rgba(243, 241, 235, 0.82);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--foreground);
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 100svh;
+      align-items: flex-end;
+      overflow: hidden;
+      padding: 160px 0 56px;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.8),
+          transparent 88%
+        );
+    }
+
+    .hero-orbit {
+      position: absolute;
+      top: 16%;
+      right: -9vw;
+      width: min(54vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      animation: rotate 32s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      position: absolute;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-orbit::before {
+      inset: 13%;
+    }
+
+    .hero-orbit::after {
+      inset: 31%;
+      background: var(--accent);
+      box-shadow: 0 0 100px rgba(255, 59, 48, 0.25);
+    }
+
+    .orbit-dot {
+      position: absolute;
+      top: 50%;
+      left: -7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--foreground);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .hero-title span {
+      display: block;
+      opacity: 0;
+      transform: translateY(70px);
+      animation: reveal 900ms forwards;
+    }
+
+    .hero-title span:nth-child(2) {
+      animation-delay: 120ms;
+    }
+
+    .hero-title span:nth-child(3) {
+      animation-delay: 240ms;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      margin-top: 72px;
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(18px, 1.6vw, 24px);
+      line-height: 1.45;
+    }
+
+    .scroll-note {
+      justify-self: end;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .statement {
+      display: flex;
+      min-height: 100svh;
+      align-items: center;
+      background: var(--dark);
+      color: var(--light);
+    }
+
+    .statement-inner {
+      padding: 140px 0;
+    }
+
+    .statement-line {
+      max-width: 1300px;
+      margin: 0;
+      color: rgba(247, 245, 239, 0.32);
+      font-size: clamp(48px, 7.8vw, 126px);
+      font-weight: 500;
+      letter-spacing: -0.07em;
+      line-height: 0.96;
+      transition: color 500ms ease;
+    }
+
+    .statement-line.visible {
+      color: var(--light);
+    }
+
+    .accent-text {
+      color: var(--accent);
+    }
+
+    .section {
+      padding: 160px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 80px;
+      margin-bottom: 96px;
+    }
+
+    .section-number {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .trap-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .flow-card {
+      min-height: 560px;
+      padding: 40px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .flow-card.dark {
+      color: white;
+      background: var(--dark);
+    }
+
+    .flow-label {
+      margin-bottom: 72px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .dark .flow-label {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .flow-item {
+      display: flex;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-size: clamp(18px, 1.7vw, 26px);
+    }
+
+    .dark .flow-item {
+      border-color: rgba(255, 255, 255, 0.17);
+    }
+
+    .flow-arrow {
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .principle {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      transition:
+        transform 250ms ease,
+        background 250ms ease,
+        color 250ms ease;
+    }
+
+    .principle:hover {
+      color: white;
+      background: var(--dark);
+      transform: translateY(-8px);
+    }
+
+    .principle-number {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .principle h3 {
+      max-width: 300px;
+      margin: 110px 0 18px;
+      font-size: clamp(28px, 2.6vw, 44px);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .principle p {
+      max-width: 390px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .pattern-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .pattern {
+      display: grid;
+      grid-template-columns: 100px 0.8fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+      padding: 42px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding 200ms ease;
+    }
+
+    .pattern:hover {
+      padding-right: 18px;
+      padding-left: 18px;
+    }
+
+    .pattern-index {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pattern-title {
+      margin: 0;
+      font-size: clamp(24px, 2.3vw, 40px);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+
+    .pattern-copy {
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .score-section {
+      color: white;
+      background: var(--dark);
+    }
+
+    .score-section .eyebrow,
+    .score-section .body-copy {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .score-panel {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .score-ring {
+      position: relative;
+      display: grid;
+      width: min(70vw, 520px);
+      aspect-ratio: 1;
+      place-items: center;
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+    }
+
+    .score-ring::before,
+    .score-ring::after {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .score-ring::before {
+      inset: 13%;
+    }
+
+    .score-ring::after {
+      inset: 28%;
+      border-color: var(--accent);
+    }
+
+    .score-value {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .score-value strong {
+      display: block;
+      font-size: clamp(64px, 8vw, 120px);
+      font-weight: 500;
+      letter-spacing: -0.07em;
+    }
+
+    .score-value span {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .score-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 34px;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .control-row label {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+    }
+
+    .control-row output {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 2px;
+      appearance: none;
+      border: 0;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      width: 16px;
+      height: 16px;
+      appearance: none;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .thinklab-shell {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: #ebe8df;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+    }
+
+    .app-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .thinklab-main {
+      display: grid;
+      grid-template-columns: 0.42fr 1.58fr;
+      min-height: 720px;
+    }
+
+    .intent-sidebar {
+      padding: 24px;
+      border-right: 1px solid var(--line);
+    }
+
+    .intent-button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 16px 18px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: var(--muted);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition:
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .intent-button:hover,
+    .intent-button.active {
+      border-color: var(--line);
+      color: var(--foreground);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .thinking-space {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(32px, 6vw, 84px);
+    }
+
+    .thinking-space h3 {
+      max-width: 840px;
+      margin: 0;
+      font-size: clamp(40px, 5.4vw, 82px);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 0.97;
+    }
+
+    .thinking-space p {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .thinking-input {
+      display: flex;
+      gap: 12px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .thinking-input input {
+      width: 100%;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .thinking-input button {
+      min-width: 130px;
+      border: 0;
+      border-radius: 14px;
+      color: white;
+      background: var(--foreground);
+      cursor: pointer;
+    }
+
+    .manifesto {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      padding: 160px 0;
+      color: white;
+      background: var(--accent);
+    }
+
+    .manifesto-copy {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0;
+      font-size: clamp(42px, 6.5vw, 102px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+
+    .manifesto-circle {
+      position: absolute;
+      right: -14vw;
+      bottom: -26vw;
+      width: 72vw;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+    }
+
+    .footer {
+      padding: 72px 0 40px;
+      color: white;
+      background: var(--dark);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 120px;
+    }
+
+    .footer-title {
+      max-width: 1000px;
+      margin: 0;
+      font-size: clamp(52px, 8vw, 130px);
+      font-weight: 500;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      min-height: 54px;
+      align-items: center;
+      padding: 0 22px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      transition:
+        color 180ms ease,
+        background 180ms ease;
+    }
+
+    .footer-link:hover {
+      color: var(--dark);
+      background: white;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition:
+        opacity 700ms ease,
+        transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        width: min(calc(100% - 32px), var(--max-width));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-bottom,
+      .section-header,
+      .trap-layout,
+      .score-panel,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .scroll-note {
+        display: none;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pattern {
+        grid-template-columns: 52px 1fr;
+      }
+
+      .pattern-copy {
+        grid-column: 2;
+      }
+
+      .thinklab-main {
+        grid-template-columns: 1fr;
+      }
+
+      .intent-sidebar {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .intent-button {
+        width: auto;
+        flex: 0 0 auto;
+        margin: 0;
+      }
+
+      .thinking-space {
+        min-height: 600px;
+      }
+
+      .footer-link {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .section {
+        padding: 110px 0;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-orbit {
+        top: 9%;
+        right: -46vw;
+        width: 105vw;
+      }
+
+      .flow-card {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      .pattern {
+        gap: 18px;
+      }
+
+      .control-row {
+        grid-template-columns: 110px 1fr 28px;
+        gap: 12px;
+      }
+
+      .thinking-input {
+        flex-direction: column;
+      }
+
+      .thinking-input button {
+        min-height: 54px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">Human Intelligence Lab</a>
+
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#framework">Framework</a>
+        <a href="#patterns">Patterns</a>
+        <a href="#thinklab">ThinkLab</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page" id="top">
+    <section class="hero">
+      <div class="hero-grid"></div>
+
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="orbit-dot"></span>
+      </div>
+
+      <div class="container hero-content">
+        <p class="eyebrow">Experimental research project · 2026</p>
+
+        <h1 class="display hero-title">
+          <span>Designing</span>
+          <span>Human</span>
+          <span>Intelligence.</span>
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="hero-description">
+            An experimental framework for designing artificial
+            intelligence that strengthens human thinking instead of
+            replacing it.
+          </p>
+
+          <span class="scroll-note">Scroll to explore ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="container statement-inner">
+        <p class="statement-line reveal">
+          AI changed how we get answers.
+          <span class="accent-text">
+            Now we must redesign how we think.
+          </span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-number">01 · The Answer Trap</p>
+
+          <div>
+            <h2 class="headline">
+              The fastest answer is not always the best interaction.
+            </h2>
+
+            <p class="subheadline">
+              Most AI products are optimized to complete a task.
+              Few are designed to leave the human more capable after
+              the task is complete.
+            </p>
+          </div>
+        </div>
+
+        <div class="trap-layout">
+          <article class="flow-card reveal">
+            <p class="flow-label">Current interaction model</p>
+
+            <div class="flow">
+              <div class="flow-item">
+                <span>Question</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Instant answer</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Task completed</span>
+                <span class="flow-arrow">×</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="flow-card dark reveal">
+            <p class="flow-label">Proposed interaction model</p>
+
+            <div class="flow">
+              <div class="flow-item">
+                <span>Intent</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Reflection</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Hypothesis</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Dialogue</span>
+                <span class="flow-arrow">↓</span>
+              </div>
+
+              <div class="flow-item">
+                <span>Growth</span>
+                <span class="flow-arrow">+</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="framework">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-number">02 · Framework</p>
+
+          <div>
+            <h2 class="headline">
+              AI should adapt to the human goal, not only to the prompt.
+            </h2>
+
+            <p class="subheadline">
+              The framework moves through four layers: intent,
+              interaction, growth and outcome.
+            </p>
+          </div>
+        </div>
+
+        <div class="principles-grid">
+          <article class="principle reveal">
+            <span class="principle-number">Layer 01</span>
+
+            <h3>Intent</h3>
+
+            <p>
+              Is the person trying to learn, decide, create, explore,
+              solve or reflect?
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <span class="principle-number">Layer 02</span>
+
+            <h3>Interaction</h3>
+
+            <p>
+              The AI chooses a dialogue structure that supports the
+              user’s actual cognitive goal.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <span class="principle-number">Layer 03</span>
+
+            <h3>Growth</h3>
+
+            <p>
+              The experience is evaluated by understanding, judgment,
+              creativity and independence.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="patterns">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-number">03 · Interaction Patterns</p>
+
+          <div>
+            <h2 class="headline">
+              Ten patterns for AI that supports thinking.
+            </h2>
+
+            <p class="subheadline">
+              These patterns are a design hypothesis, not a finished
+              theory. They are intended to be tested, challenged and
+              developed.
+            </p>
+          </div>
+        </div>
+
+        <div class="pattern-list">
+          <article class="pattern reveal">
+            <span class="pattern-index">01</span>
+            <h3 class="pattern-title">Intent-Aware Interaction</h3>
+            <p class="pattern-copy">
+              Identify whether the person wants speed, learning,
+              reflection, exploration or a decision before choosing
+              the response model.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">02</span>
+            <h3 class="pattern-title">Reflection Loop</h3>
+            <p class="pattern-copy">
+              Invite the user to form an initial position before the
+              system supplies a complete answer.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">03</span>
+            <h3 class="pattern-title">Cognitive Friction</h3>
+            <p class="pattern-copy">
+              Add small, deliberate moments of effort when removing
+              all effort would weaken understanding.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">04</span>
+            <h3 class="pattern-title">Thinking Scaffolding</h3>
+            <p class="pattern-copy">
+              Break complex reasoning into questions, clues,
+              comparisons and manageable cognitive steps.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">05</span>
+            <h3 class="pattern-title">Multiple Perspectives</h3>
+            <p class="pattern-copy">
+              Present several credible interpretations instead of
+              disguising one answer as the only possible truth.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">06</span>
+            <h3 class="pattern-title">Confidence Transparency</h3>
+            <p class="pattern-copy">
+              Show uncertainty, assumptions and the limits of the
+              system’s knowledge.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">07</span>
+            <h3 class="pattern-title">Human Checkpoint</h3>
+            <p class="pattern-copy">
+              Return value-based, consequential and irreversible
+              decisions to the human.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">08</span>
+            <h3 class="pattern-title">Creative Divergence</h3>
+            <p class="pattern-copy">
+              Expand the space of possibilities before converging on
+              a single polished solution.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">09</span>
+            <h3 class="pattern-title">Growth Memory</h3>
+            <p class="pattern-copy">
+              Remember how the person’s abilities are developing, not
+              only their preferences and previous requests.
+            </p>
+          </article>
+
+          <article class="pattern reveal">
+            <span class="pattern-index">10</span>
+            <h3 class="pattern-title">Wisdom Delay</h3>
+            <p class="pattern-copy">
+              Delay a complete answer when a brief pause, question or
+              hypothesis could produce deeper judgment.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section score-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-number">04 · Human Growth Score</p>
+
+          <div>
+            <h2 class="headline">
+              What if AI quality was measured by human growth?
+            </h2>
+
+            <p class="subheadline">
+              Adjust the dimensions to explore a prototype metric for
+              evaluating the impact of an AI interaction.
+            </p>
+          </div>
+        </div>
+
+        <div class="score-panel">
+          <div class="score-ring reveal">
+            <div class="score-value">
+              <strong id="scoreValue">72</strong>
+              <span>Human Growth Score</span>
+            </div>
+          </div>
+
+          <div class="score-controls reveal">
+            <div class="control-row">
+              <label for="understanding">Understanding</label>
+              <input
+                id="understanding"
+                type="range"
+                min="0"
+                max="100"
+                value="78"
+              />
+              <output>78</output>
+            </div>
+
+            <div class="control-row">
+              <label for="judgment">Judgment</label>
+              <input
+                id="judgment"
+                type="range"
+                min="0"
+                max="100"
+                value="68"
+              />
+              <output>68</output>
+            </div>
+
+            <div class="control-row">
+              <label for="creativity">Creativity</label>
+              <input
+                id="creativity"
+                type="range"
+                min="0"
+                max="100"
+                value="74"
+              />
+              <output>74</output>
+            </div>
+
+            <div class="control-row">
+              <label for="curiosity">Curiosity</label>
+              <input
+                id="curiosity"
+                type="range"
+                min="0"
+                max="100"
+                value="82"
+              />
+              <output>82</output>
+            </div>
+
+            <div class="control-row">
+              <label for="independence">Independence</label>
+              <input
+                id="independence"
+                type="range"
+                min="0"
+                max="100"
+                value="58"
+              />
+              <output>58</output>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="thinklab">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-number">05 · Concept Product</p>
+
+          <div>
+            <h2 class="headline">ThinkLab is not a chatbot.</h2>
+
+            <p class="subheadline">
+              It is a thinking environment that changes its behaviour
+              according to what the person is trying to achieve.
+            </p>
+          </div>
+        </div>
+
+        <div class="thinklab-shell reveal">
+          <div class="app-bar">
+            <span>ThinkLab / Prototype 01</span>
+            <span>Human-centered mode</span>
+          </div>
+
+          <div class="thinklab-main">
+            <aside class="intent-sidebar">
+              <button
+                class="intent-button active"
+                data-mode="learn"
+                type="button"
+              >
+                Learn
+              </button>
+
+              <button
+                class="intent-button"
+                data-mode="decide"
+                type="button"
+              >
+                Decide
+              </button>
+
+              <button
+                class="intent-button"
+                data-mode="create"
+                type="button"
+              >
+                Create
+              </button>
+
+              <button
+                class="intent-button"
+                data-mode="explore"
+                type="button"
+              >
+                Explore
+              </button>
+
+              <button
+                class="intent-button"
+                data-mode="reflect"
+                type="button"
+              >
+                Reflect
+              </button>
+            </aside>
+
+            <div class="thinking-space">
+              <div>
+                <p class="eyebrow" id="modeLabel">Learning mode</p>
+
+                <h3 id="modeTitle">
+                  What would you like to understand more deeply?
+                </h3>
+
+                <p id="modeDescription">
+                  ThinkLab will first identify what you already know,
+                  then guide you through questions, comparisons and
+                  small experiments.
+                </p>
+              </div>
+
+              <form class="thinking-input" id="thinkingForm">
+                <input
+                  id="thinkingQuestion"
+                  type="text"
+                  placeholder="Describe the topic or challenge"
+                  autocomplete="off"
+                />
+
+                <button type="submit">Begin</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto">
+      <div class="container">
+        <p class="manifesto-copy reveal">
+          The best AI is not the one that thinks instead of us.
+          It is the one that leaves us more curious, more capable and
+          more human.
+        </p>
+      </div>
+
+      <div class="manifesto-circle" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <h2 class="footer-title">
+          Better answers are not enough.
+        </h2>
+
+        <a class="footer-link" href="#top">Return to top ↑</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Human Intelligence Lab</span>
+        <span>Experimental design framework · 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("nav");
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 30);
+    });
+
+    const revealElements = document.querySelectorAll(
+      ".reveal, .statement-line"
+    );
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.14
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    const scoreInputs = document.querySelectorAll(
+      '.score-controls input[type="range"]'
+    );
+
+    const scoreValue = document.getElementById("scoreValue");
+
+    function updateScore() {
+      const values = Array.from(scoreInputs).map((input) =>
+        Number(input.value)
+      );
+
+      const average = Math.round(
+        values.reduce((total, value) => total + value, 0) /
+          values.length
+      );
+
+      scoreValue.textContent = average;
+
+      scoreInputs.forEach((input) => {
+        const output = input.parentElement.querySelector("output");
+        output.textContent = input.value;
+      });
+    }
+
+    scoreInputs.forEach((input) => {
+      input.addEventListener("input", updateScore);
+    });
+
+    updateScore();
+
+    const modes = {
+      learn: {
+        label: "Learning mode",
+        title: "What would you like to understand more deeply?",
+        description:
+          "ThinkLab will first identify what you already know, then guide you through questions, comparisons and small experiments."
+      },
+      decide: {
+        label: "Decision mode",
+        title: "Which decision deserves more careful judgment?",
+        description:
+          "ThinkLab will clarify your criteria, expose trade-offs and preserve the final responsibility for you."
+      },
+      create: {
+        label: "Creative mode",
+        title: "What possibilities would you like to open?",
+        description:
+          "ThinkLab will expand the space of ideas before helping you evaluate and refine a direction."
+      },
+      explore: {
+        label: "Exploration mode",
+        title: "Which question do you want to investigate?",
+        description:
+          "ThinkLab will show multiple perspectives, uncertainty and promising paths for further inquiry."
+      },
+      reflect: {
+        label: "Reflection mode",
+        title: "What experience would you like to understand?",
+        description:
+          "ThinkLab will ask careful questions that help you articulate your own interpretation rather than replacing it."
+      }
+    };
+
+    const modeButtons = document.querySelectorAll(".intent-button");
+    const modeLabel = document.getElementById("modeLabel");
+    const modeTitle = document.getElementById("modeTitle");
+    const modeDescription =
+      document.getElementById("modeDescription");
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        modeButtons.forEach((item) =>
+          item.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        const selectedMode = modes[button.dataset.mode];
+
+        modeLabel.textContent = selectedMode.label;
+        modeTitle.textContent = selectedMode.title;
+        modeDescription.textContent = selectedMode.description;
+      });
+    });
+
+    const thinkingForm = document.getElementById("thinkingForm");
+    const thinkingQuestion =
+      document.getElementById("thinkingQuestion");
+
+    thinkingForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const question = thinkingQuestion.value.trim();
+
+      if (!question) {
+        thinkingQuestion.focus();
+        return;
+      }
+
+      modeTitle.textContent =
+        "Before we search for an answer, what is your current hypothesis?";
+
+      modeDescription.textContent =
+        "This is the Reflection Loop in action: the system asks you to make your thinking visible before it contributes its own response.";
+
+      thinkingQuestion.value = "";
+      thinkingQuestion.placeholder = "Write your first hypothesis";
+      thinkingQuestion.focus();
+    });
+  </script>
+</body>
+</html>
