@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta
     name="description"
-    content="Human Intelligence Lab — an experimental framework for designing AI that strengthens human thinking."
+    content="Human Intelligence Lab — экспериментальный фреймворк для проектирования искусственного интеллекта, который усиливает мышление человека."
   />
 
   <title>Human Intelligence Lab</title>
@@ -37,14 +33,10 @@
 
     body {
       margin: 0;
-      background: var(--background);
-      color: var(--foreground);
-      font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
       overflow-x: hidden;
+      color: var(--foreground);
+      background: var(--background);
+      font-family: Inter, Arial, Helvetica, sans-serif;
     }
 
     button,
@@ -60,7 +52,7 @@
     }
 
     ::selection {
-      color: white;
+      color: #ffffff;
       background: var(--accent);
     }
 
@@ -69,7 +61,7 @@
     }
 
     .container {
-      width: min(calc(100% - 48px), var(--max-width));
+      width: min(calc(100% - 112px), var(--max-width));
       margin: 0 auto;
     }
 
@@ -83,35 +75,28 @@
     }
 
     .display {
+      max-width: 1050px;
       margin: 0;
-      font-size: clamp(54px, 9vw, 150px);
+      font-size: clamp(52px, 7.1vw, 132px);
       font-weight: 500;
-      letter-spacing: -0.075em;
-      line-height: 0.88;
+      letter-spacing: -0.065em;
+      line-height: 0.92;
     }
 
     .headline {
       margin: 0;
-      font-size: clamp(42px, 6vw, 92px);
+      font-size: clamp(42px, 5.8vw, 88px);
       font-weight: 500;
-      letter-spacing: -0.065em;
-      line-height: 0.95;
+      letter-spacing: -0.058em;
+      line-height: 0.99;
     }
 
     .subheadline {
-      max-width: 760px;
+      max-width: 820px;
       margin: 32px 0 0;
-      font-size: clamp(20px, 2.3vw, 34px);
-      letter-spacing: -0.035em;
-      line-height: 1.15;
-    }
-
-    .body-copy {
-      max-width: 720px;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(18px, 1.5vw, 24px);
-      line-height: 1.5;
+      font-size: clamp(20px, 2.2vw, 32px);
+      letter-spacing: -0.028em;
+      line-height: 1.22;
     }
 
     .nav {
@@ -128,15 +113,15 @@
 
     .nav.scrolled {
       border-color: var(--line);
-      background: rgba(243, 241, 235, 0.82);
+      background: rgba(243, 241, 235, 0.84);
       backdrop-filter: blur(20px);
     }
 
     .nav-inner {
       display: flex;
+      min-height: 76px;
       align-items: center;
       justify-content: space-between;
-      min-height: 72px;
     }
 
     .brand {
@@ -148,7 +133,7 @@
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 30px;
       color: var(--muted);
       font-size: 13px;
     }
@@ -167,7 +152,7 @@
       min-height: 100svh;
       align-items: flex-end;
       overflow: hidden;
-      padding: 160px 0 56px;
+      padding: 170px 0 60px;
     }
 
     .hero-grid {
@@ -181,8 +166,8 @@
       mask-image:
         linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.8),
-          transparent 88%
+          rgba(0, 0, 0, 0.82),
+          transparent 90%
         );
     }
 
@@ -251,15 +236,15 @@
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       align-items: end;
-      margin-top: 72px;
+      margin-top: 66px;
     }
 
     .hero-description {
-      max-width: 580px;
+      max-width: 650px;
       margin: 0;
       color: var(--muted);
-      font-size: clamp(18px, 1.6vw, 24px);
-      line-height: 1.45;
+      font-size: clamp(18px, 1.55vw, 23px);
+      line-height: 1.5;
     }
 
     .scroll-note {
@@ -274,8 +259,8 @@
       display: flex;
       min-height: 100svh;
       align-items: center;
-      background: var(--dark);
       color: var(--light);
+      background: var(--dark);
     }
 
     .statement-inner {
@@ -283,13 +268,13 @@
     }
 
     .statement-line {
-      max-width: 1300px;
+      max-width: 1320px;
       margin: 0;
       color: rgba(247, 245, 239, 0.32);
-      font-size: clamp(48px, 7.8vw, 126px);
+      font-size: clamp(48px, 7.2vw, 116px);
       font-weight: 500;
-      letter-spacing: -0.07em;
-      line-height: 0.96;
+      letter-spacing: -0.058em;
+      line-height: 1;
       transition: color 500ms ease;
     }
 
@@ -314,6 +299,7 @@
     }
 
     .section-number {
+      margin: 0;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -335,12 +321,12 @@
     }
 
     .flow-card.dark {
-      color: white;
+      color: #ffffff;
       background: var(--dark);
     }
 
     .flow-label {
-      margin-bottom: 72px;
+      margin: 0 0 72px;
       color: var(--muted);
       font-size: 12px;
       font-weight: 700;
@@ -380,13 +366,13 @@
 
     .principles-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
 
     .principle {
       position: relative;
-      min-height: 360px;
+      min-height: 390px;
       overflow: hidden;
       padding: 32px;
       border: 1px solid var(--line);
@@ -398,7 +384,7 @@
     }
 
     .principle:hover {
-      color: white;
+      color: #ffffff;
       background: var(--dark);
       transform: translateY(-8px);
     }
@@ -412,10 +398,10 @@
 
     .principle h3 {
       max-width: 300px;
-      margin: 110px 0 18px;
-      font-size: clamp(28px, 2.6vw, 44px);
+      margin: 105px 0 18px;
+      font-size: clamp(27px, 2.35vw, 40px);
       font-weight: 500;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.045em;
       line-height: 1;
     }
 
@@ -423,8 +409,8 @@
       max-width: 390px;
       margin: 0;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.45;
+      font-size: 16px;
+      line-height: 1.5;
     }
 
     .pattern-list {
@@ -453,13 +439,14 @@
 
     .pattern-title {
       margin: 0;
-      font-size: clamp(24px, 2.3vw, 40px);
+      font-size: clamp(24px, 2.2vw, 38px);
       font-weight: 500;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
     }
 
     .pattern-copy {
-      max-width: 620px;
+      max-width: 650px;
       margin: 0;
       color: var(--muted);
       font-size: 18px;
@@ -467,13 +454,8 @@
     }
 
     .score-section {
-      color: white;
+      color: #ffffff;
       background: var(--dark);
-    }
-
-    .score-section .eyebrow,
-    .score-section .body-copy {
-      color: rgba(255, 255, 255, 0.55);
     }
 
     .score-panel {
@@ -527,7 +509,7 @@
     .score-value span {
       color: rgba(255, 255, 255, 0.5);
       font-size: 12px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
@@ -539,7 +521,7 @@
 
     .control-row {
       display: grid;
-      grid-template-columns: 150px 1fr 34px;
+      grid-template-columns: 180px 1fr 34px;
       gap: 18px;
       align-items: center;
     }
@@ -632,16 +614,16 @@
     }
 
     .thinking-space h3 {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0;
-      font-size: clamp(40px, 5.4vw, 82px);
+      font-size: clamp(40px, 5.1vw, 78px);
       font-weight: 500;
-      letter-spacing: -0.06em;
-      line-height: 0.97;
+      letter-spacing: -0.052em;
+      line-height: 1;
     }
 
     .thinking-space p {
-      max-width: 700px;
+      max-width: 720px;
       color: var(--muted);
       font-size: 20px;
       line-height: 1.5;
@@ -667,7 +649,7 @@
       min-width: 130px;
       border: 0;
       border-radius: 14px;
-      color: white;
+      color: #ffffff;
       background: var(--foreground);
       cursor: pointer;
     }
@@ -677,19 +659,19 @@
       min-height: 100svh;
       overflow: hidden;
       padding: 160px 0;
-      color: white;
+      color: #ffffff;
       background: var(--accent);
     }
 
     .manifesto-copy {
       position: relative;
       z-index: 2;
-      max-width: 1280px;
+      max-width: 1300px;
       margin: 0;
-      font-size: clamp(42px, 6.5vw, 102px);
+      font-size: clamp(42px, 6vw, 96px);
       font-weight: 500;
-      letter-spacing: -0.065em;
-      line-height: 0.98;
+      letter-spacing: -0.052em;
+      line-height: 1.02;
     }
 
     .manifesto-circle {
@@ -704,7 +686,7 @@
 
     .footer {
       padding: 72px 0 40px;
-      color: white;
+      color: #ffffff;
       background: var(--dark);
     }
 
@@ -717,12 +699,12 @@
     }
 
     .footer-title {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 0;
-      font-size: clamp(52px, 8vw, 130px);
+      font-size: clamp(52px, 7.6vw, 124px);
       font-weight: 500;
-      letter-spacing: -0.075em;
-      line-height: 0.9;
+      letter-spacing: -0.062em;
+      line-height: 0.94;
     }
 
     .footer-link {
@@ -739,7 +721,7 @@
 
     .footer-link:hover {
       color: var(--dark);
-      background: white;
+      background: #ffffff;
     }
 
     .footer-bottom {
@@ -779,9 +761,19 @@
       }
     }
 
+    @media (max-width: 1180px) {
+      .container {
+        width: min(calc(100% - 72px), var(--max-width));
+      }
+
+      .principles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 900px) {
       .container {
-        width: min(calc(100% - 32px), var(--max-width));
+        width: min(calc(100% - 40px), var(--max-width));
       }
 
       .nav-links {
@@ -798,10 +790,6 @@
 
       .scroll-note {
         display: none;
-      }
-
-      .principles-grid {
-        grid-template-columns: 1fr;
       }
 
       .pattern {
@@ -840,6 +828,10 @@
     }
 
     @media (max-width: 620px) {
+      .container {
+        width: min(calc(100% - 32px), var(--max-width));
+      }
+
       .section {
         padding: 110px 0;
       }
@@ -854,6 +846,10 @@
         width: 105vw;
       }
 
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
       .flow-card {
         min-height: auto;
         padding: 24px;
@@ -864,7 +860,7 @@
       }
 
       .control-row {
-        grid-template-columns: 110px 1fr 28px;
+        grid-template-columns: 124px 1fr 28px;
         gap: 12px;
       }
 
@@ -905,9 +901,9 @@
       <a class="brand" href="#top">Human Intelligence Lab</a>
 
       <div class="nav-links">
-        <a href="#problem">Problem</a>
-        <a href="#framework">Framework</a>
-        <a href="#patterns">Patterns</a>
+        <a href="#problem">Проблема</a>
+        <a href="#framework">Фреймворк</a>
+        <a href="#patterns">Паттерны</a>
         <a href="#thinklab">ThinkLab</a>
       </div>
     </div>
@@ -922,22 +918,21 @@
       </div>
 
       <div class="container hero-content">
-        <p class="eyebrow">Experimental research project · 2026</p>
+        <p class="eyebrow">Исследовательский проект · 2026</p>
 
         <h1 class="display hero-title">
-          <span>Designing</span>
-          <span>Human</span>
-          <span>Intelligence.</span>
+          <span>Проектируем</span>
+          <span>человеческий</span>
+          <span>интеллект.</span>
         </h1>
 
         <div class="hero-bottom">
           <p class="hero-description">
-            An experimental framework for designing artificial
-            intelligence that strengthens human thinking instead of
-            replacing it.
+            Экспериментальный фреймворк для проектирования искусственного
+            интеллекта, который усиливает мышление человека, а не заменяет его.
           </p>
 
-          <span class="scroll-note">Scroll to explore ↓</span>
+          <span class="scroll-note">Прокрутите, чтобы исследовать ↓</span>
         </div>
       </div>
     </section>
@@ -945,9 +940,9 @@
     <section class="statement">
       <div class="container statement-inner">
         <p class="statement-line reveal">
-          AI changed how we get answers.
+          Искусственный интеллект изменил то, как мы получаем ответы.
           <span class="accent-text">
-            Now we must redesign how we think.
+            Теперь нам нужно пересмотреть то, как мы думаем.
           </span>
         </p>
       </div>
@@ -956,69 +951,69 @@
     <section class="section" id="problem">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-number">01 · The Answer Trap</p>
+          <p class="section-number">01 · Ловушка готового ответа</p>
 
           <div>
             <h2 class="headline">
-              The fastest answer is not always the best interaction.
+              Самый быстрый ответ — не всегда лучший сценарий взаимодействия.
             </h2>
 
             <p class="subheadline">
-              Most AI products are optimized to complete a task.
-              Few are designed to leave the human more capable after
-              the task is complete.
+              Большинство AI-продуктов оптимизированы для быстрого выполнения
+              задачи. Но лишь немногие делают человека более способным после
+              завершения взаимодействия.
             </p>
           </div>
         </div>
 
         <div class="trap-layout">
           <article class="flow-card reveal">
-            <p class="flow-label">Current interaction model</p>
+            <p class="flow-label">Текущая модель взаимодействия</p>
 
             <div class="flow">
               <div class="flow-item">
-                <span>Question</span>
+                <span>Вопрос</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Instant answer</span>
+                <span>Мгновенный ответ</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Task completed</span>
+                <span>Задача выполнена</span>
                 <span class="flow-arrow">×</span>
               </div>
             </div>
           </article>
 
           <article class="flow-card dark reveal">
-            <p class="flow-label">Proposed interaction model</p>
+            <p class="flow-label">Предлагаемая модель взаимодействия</p>
 
             <div class="flow">
               <div class="flow-item">
-                <span>Intent</span>
+                <span>Намерение</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Reflection</span>
+                <span>Рефлексия</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Hypothesis</span>
+                <span>Гипотеза</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Dialogue</span>
+                <span>Диалог</span>
                 <span class="flow-arrow">↓</span>
               </div>
 
               <div class="flow-item">
-                <span>Growth</span>
+                <span>Развитие</span>
                 <span class="flow-arrow">+</span>
               </div>
             </div>
@@ -1030,51 +1025,54 @@
     <section class="section" id="framework">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-number">02 · Framework</p>
+          <p class="section-number">02 · Фреймворк</p>
 
           <div>
             <h2 class="headline">
-              AI should adapt to the human goal, not only to the prompt.
+              AI должен адаптироваться к цели человека, а не только к его запросу.
             </h2>
 
             <p class="subheadline">
-              The framework moves through four layers: intent,
-              interaction, growth and outcome.
+              Фреймворк проходит через четыре уровня: намерение,
+              взаимодействие, развитие и результат.
             </p>
           </div>
         </div>
 
         <div class="principles-grid">
           <article class="principle reveal">
-            <span class="principle-number">Layer 01</span>
-
-            <h3>Intent</h3>
-
+            <span class="principle-number">Уровень 01</span>
+            <h3>Намерение</h3>
             <p>
-              Is the person trying to learn, decide, create, explore,
-              solve or reflect?
+              Что человек хочет сделать: изучить тему, принять решение,
+              создать идею, исследовать вопрос или осмыслить опыт?
             </p>
           </article>
 
           <article class="principle reveal">
-            <span class="principle-number">Layer 02</span>
-
-            <h3>Interaction</h3>
-
+            <span class="principle-number">Уровень 02</span>
+            <h3>Взаимодействие</h3>
             <p>
-              The AI chooses a dialogue structure that supports the
-              user’s actual cognitive goal.
+              AI выбирает структуру диалога, которая поддерживает
+              реальную когнитивную цель пользователя.
             </p>
           </article>
 
           <article class="principle reveal">
-            <span class="principle-number">Layer 03</span>
-
-            <h3>Growth</h3>
-
+            <span class="principle-number">Уровень 03</span>
+            <h3>Развитие</h3>
             <p>
-              The experience is evaluated by understanding, judgment,
-              creativity and independence.
+              Что изменилось после взаимодействия: понимание,
+              самостоятельность, критическое мышление или творчество?
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <span class="principle-number">Уровень 04</span>
+            <h3>Результат</h3>
+            <p>
+              Получил ли человек только готовый ответ — или стал
+              сильнее и способен двигаться дальше самостоятельно?
             </p>
           </article>
         </div>
@@ -1084,17 +1082,16 @@
     <section class="section" id="patterns">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-number">03 · Interaction Patterns</p>
+          <p class="section-number">03 · Паттерны взаимодействия</p>
 
           <div>
             <h2 class="headline">
-              Ten patterns for AI that supports thinking.
+              Десять паттернов AI, который поддерживает мышление.
             </h2>
 
             <p class="subheadline">
-              These patterns are a design hypothesis, not a finished
-              theory. They are intended to be tested, challenged and
-              developed.
+              Эти паттерны — проектная гипотеза, а не законченная теория.
+              Их можно проверять, оспаривать и развивать.
             </p>
           </div>
         </div>
@@ -1102,92 +1099,91 @@
         <div class="pattern-list">
           <article class="pattern reveal">
             <span class="pattern-index">01</span>
-            <h3 class="pattern-title">Intent-Aware Interaction</h3>
+            <h3 class="pattern-title">Взаимодействие с учётом намерения</h3>
             <p class="pattern-copy">
-              Identify whether the person wants speed, learning,
-              reflection, exploration or a decision before choosing
-              the response model.
+              Сначала определить, что человеку действительно нужно:
+              скорость, обучение, рефлексия, исследование или решение.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">02</span>
-            <h3 class="pattern-title">Reflection Loop</h3>
+            <h3 class="pattern-title">Цикл рефлексии</h3>
             <p class="pattern-copy">
-              Invite the user to form an initial position before the
-              system supplies a complete answer.
+              Предложить человеку сформулировать собственную позицию
+              до того, как система выдаст полный ответ.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">03</span>
-            <h3 class="pattern-title">Cognitive Friction</h3>
+            <h3 class="pattern-title">Когнитивное усилие</h3>
             <p class="pattern-copy">
-              Add small, deliberate moments of effort when removing
-              all effort would weaken understanding.
+              Добавлять небольшое осмысленное усилие там, где полное
+              устранение сложности ослабляет понимание.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">04</span>
-            <h3 class="pattern-title">Thinking Scaffolding</h3>
+            <h3 class="pattern-title">Каркас мышления</h3>
             <p class="pattern-copy">
-              Break complex reasoning into questions, clues,
-              comparisons and manageable cognitive steps.
+              Разбивать сложные рассуждения на вопросы, подсказки,
+              сравнения и последовательные шаги.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">05</span>
-            <h3 class="pattern-title">Multiple Perspectives</h3>
+            <h3 class="pattern-title">Несколько перспектив</h3>
             <p class="pattern-copy">
-              Present several credible interpretations instead of
-              disguising one answer as the only possible truth.
+              Показывать несколько обоснованных интерпретаций, а не
+              выдавать один ответ за единственно возможную истину.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">06</span>
-            <h3 class="pattern-title">Confidence Transparency</h3>
+            <h3 class="pattern-title">Прозрачность уверенности</h3>
             <p class="pattern-copy">
-              Show uncertainty, assumptions and the limits of the
-              system’s knowledge.
+              Показывать степень уверенности, допущения и границы
+              знаний системы.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">07</span>
-            <h3 class="pattern-title">Human Checkpoint</h3>
+            <h3 class="pattern-title">Человеческая контрольная точка</h3>
             <p class="pattern-copy">
-              Return value-based, consequential and irreversible
-              decisions to the human.
+              Возвращать человеку решения, связанные с ценностями,
+              последствиями и необратимыми действиями.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">08</span>
-            <h3 class="pattern-title">Creative Divergence</h3>
+            <h3 class="pattern-title">Творческое расхождение</h3>
             <p class="pattern-copy">
-              Expand the space of possibilities before converging on
-              a single polished solution.
+              Сначала расширять пространство возможностей, а затем
+              помогать выбирать и дорабатывать направление.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">09</span>
-            <h3 class="pattern-title">Growth Memory</h3>
+            <h3 class="pattern-title">Память развития</h3>
             <p class="pattern-copy">
-              Remember how the person’s abilities are developing, not
-              only their preferences and previous requests.
+              Запоминать не только предпочтения человека, но и то,
+              как развиваются его знания, навыки и самостоятельность.
             </p>
           </article>
 
           <article class="pattern reveal">
             <span class="pattern-index">10</span>
-            <h3 class="pattern-title">Wisdom Delay</h3>
+            <h3 class="pattern-title">Осмысленная задержка</h3>
             <p class="pattern-copy">
-              Delay a complete answer when a brief pause, question or
-              hypothesis could produce deeper judgment.
+              Не выдавать полный ответ мгновенно, когда короткая пауза,
+              вопрос или гипотеза могут привести к более глубокому выводу.
             </p>
           </article>
         </div>
@@ -1197,16 +1193,16 @@
     <section class="section score-section">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-number">04 · Human Growth Score</p>
+          <p class="section-number">04 · Индекс развития человека</p>
 
           <div>
             <h2 class="headline">
-              What if AI quality was measured by human growth?
+              Что, если качество AI измерять развитием человека?
             </h2>
 
             <p class="subheadline">
-              Adjust the dimensions to explore a prototype metric for
-              evaluating the impact of an AI interaction.
+              Изменяйте показатели и исследуйте прототип метрики,
+              которая оценивает влияние взаимодействия с AI.
             </p>
           </div>
         </div>
@@ -1215,68 +1211,38 @@
           <div class="score-ring reveal">
             <div class="score-value">
               <strong id="scoreValue">72</strong>
-              <span>Human Growth Score</span>
+              <span>Индекс развития</span>
             </div>
           </div>
 
           <div class="score-controls reveal">
             <div class="control-row">
-              <label for="understanding">Understanding</label>
-              <input
-                id="understanding"
-                type="range"
-                min="0"
-                max="100"
-                value="78"
-              />
+              <label for="understanding">Понимание</label>
+              <input id="understanding" type="range" min="0" max="100" value="78" />
               <output>78</output>
             </div>
 
             <div class="control-row">
-              <label for="judgment">Judgment</label>
-              <input
-                id="judgment"
-                type="range"
-                min="0"
-                max="100"
-                value="68"
-              />
+              <label for="judgment">Суждение</label>
+              <input id="judgment" type="range" min="0" max="100" value="68" />
               <output>68</output>
             </div>
 
             <div class="control-row">
-              <label for="creativity">Creativity</label>
-              <input
-                id="creativity"
-                type="range"
-                min="0"
-                max="100"
-                value="74"
-              />
+              <label for="creativity">Креативность</label>
+              <input id="creativity" type="range" min="0" max="100" value="74" />
               <output>74</output>
             </div>
 
             <div class="control-row">
-              <label for="curiosity">Curiosity</label>
-              <input
-                id="curiosity"
-                type="range"
-                min="0"
-                max="100"
-                value="82"
-              />
+              <label for="curiosity">Любопытство</label>
+              <input id="curiosity" type="range" min="0" max="100" value="82" />
               <output>82</output>
             </div>
 
             <div class="control-row">
-              <label for="independence">Independence</label>
-              <input
-                id="independence"
-                type="range"
-                min="0"
-                max="100"
-                value="58"
-              />
+              <label for="independence">Самостоятельность</label>
+              <input id="independence" type="range" min="0" max="100" value="58" />
               <output>58</output>
             </div>
           </div>
@@ -1287,79 +1253,59 @@
     <section class="section" id="thinklab">
       <div class="container">
         <div class="section-header reveal">
-          <p class="section-number">05 · Concept Product</p>
+          <p class="section-number">05 · Концепт продукта</p>
 
           <div>
-            <h2 class="headline">ThinkLab is not a chatbot.</h2>
+            <h2 class="headline">ThinkLab — это не чат-бот.</h2>
 
             <p class="subheadline">
-              It is a thinking environment that changes its behaviour
-              according to what the person is trying to achieve.
+              Это среда для мышления, которая меняет своё поведение
+              в зависимости от цели человека.
             </p>
           </div>
         </div>
 
         <div class="thinklab-shell reveal">
           <div class="app-bar">
-            <span>ThinkLab / Prototype 01</span>
-            <span>Human-centered mode</span>
+            <span>ThinkLab / Прототип 01</span>
+            <span>Человекоцентричный режим</span>
           </div>
 
           <div class="thinklab-main">
             <aside class="intent-sidebar">
-              <button
-                class="intent-button active"
-                data-mode="learn"
-                type="button"
-              >
-                Learn
+              <button class="intent-button active" data-mode="learn" type="button">
+                Изучить
               </button>
 
-              <button
-                class="intent-button"
-                data-mode="decide"
-                type="button"
-              >
-                Decide
+              <button class="intent-button" data-mode="decide" type="button">
+                Решить
               </button>
 
-              <button
-                class="intent-button"
-                data-mode="create"
-                type="button"
-              >
-                Create
+              <button class="intent-button" data-mode="create" type="button">
+                Создать
               </button>
 
-              <button
-                class="intent-button"
-                data-mode="explore"
-                type="button"
-              >
-                Explore
+              <button class="intent-button" data-mode="explore" type="button">
+                Исследовать
               </button>
 
-              <button
-                class="intent-button"
-                data-mode="reflect"
-                type="button"
-              >
-                Reflect
+              <button class="intent-button" data-mode="reflect" type="button">
+                Осмыслить
               </button>
             </aside>
 
             <div class="thinking-space">
               <div>
-                <p class="eyebrow" id="modeLabel">Learning mode</p>
+                <p class="eyebrow" id="modeLabel">Режим обучения</p>
 
                 <h3 id="modeTitle">
-                  What would you like to understand more deeply?
+                  Что вы хотите понять глубже?
                 </h3>
 
                 <p id="modeDescription">
-                  ThinkLab will first identify what you already know,
-                  then guide you through questions, comparisons and
-                  small experiments.
+                  ThinkLab сначала определит, что вы уже знаете,
+                  а затем проведёт вас через вопросы, сравнения
+                  и небольшие мысленные эксперименты.
                 </p>
               </div>
 
@@ -1367,11 +1313,11 @@
                 <input
                   id="thinkingQuestion"
                   type="text"
-                  placeholder="Describe the topic or challenge"
+                  placeholder="Опишите тему или задачу"
                   autocomplete="off"
                 />
 
-                <button type="submit">Begin</button>
+                <button type="submit">Начать</button>
               </form>
             </div>
           </div>
@@ -1382,9 +1328,9 @@
     <section class="manifesto">
       <div class="container">
         <p class="manifesto-copy reveal">
-          The best AI is not the one that thinks instead of us.
-          It is the one that leaves us more curious, more capable and
-          more human.
+          Лучший искусственный интеллект — не тот, который думает вместо нас.
+          А тот, после взаимодействия с которым мы становимся любопытнее,
+          самостоятельнее, сильнее и человечнее.
         </p>
       </div>
 
@@ -1396,15 +1342,15 @@
     <div class="container">
       <div class="footer-top">
         <h2 class="footer-title">
-          Better answers are not enough.
+          Хороших ответов уже недостаточно.
         </h2>
 
-        <a class="footer-link" href="#top">Return to top ↑</a>
+        <a class="footer-link" href="#top">Вернуться наверх ↑</a>
       </div>
 
       <div class="footer-bottom">
         <span>Human Intelligence Lab</span>
-        <span>Experimental design framework · 2026</span>
+        <span>Экспериментальный дизайн-фреймворк · 2026</span>
       </div>
     </div>
   </footer>
@@ -1469,48 +1415,47 @@
 
     const modes = {
       learn: {
-        label: "Learning mode",
-        title: "What would you like to understand more deeply?",
+        label: "Режим обучения",
+        title: "Что вы хотите понять глубже?",
         description:
-          "ThinkLab will first identify what you already know, then guide you through questions, comparisons and small experiments."
+          "ThinkLab сначала определит, что вы уже знаете, а затем проведёт вас через вопросы, сравнения и небольшие мысленные эксперименты."
       },
       decide: {
-        label: "Decision mode",
-        title: "Which decision deserves more careful judgment?",
+        label: "Режим принятия решения",
+        title: "Какое решение требует более внимательного анализа?",
         description:
-          "ThinkLab will clarify your criteria, expose trade-offs and preserve the final responsibility for you."
+          "ThinkLab поможет определить критерии, увидеть компромиссы и сохранить окончательную ответственность за вами."
       },
       create: {
-        label: "Creative mode",
-        title: "What possibilities would you like to open?",
+        label: "Творческий режим",
+        title: "Какие новые возможности вы хотите открыть?",
         description:
-          "ThinkLab will expand the space of ideas before helping you evaluate and refine a direction."
+          "ThinkLab сначала расширит пространство идей, а затем поможет оценить и доработать выбранное направление."
       },
       explore: {
-        label: "Exploration mode",
-        title: "Which question do you want to investigate?",
+        label: "Режим исследования",
+        title: "Какой вопрос вы хотите исследовать?",
         description:
-          "ThinkLab will show multiple perspectives, uncertainty and promising paths for further inquiry."
+          "ThinkLab покажет несколько перспектив, обозначит неопределённость и предложит направления для дальнейшего поиска."
       },
       reflect: {
-        label: "Reflection mode",
-        title: "What experience would you like to understand?",
+        label: "Режим осмысления",
+        title: "Какой опыт вы хотите понять?",
         description:
-          "ThinkLab will ask careful questions that help you articulate your own interpretation rather than replacing it."
+          "ThinkLab задаст бережные вопросы, которые помогут сформулировать собственную интерпретацию, а не заменят её готовым выводом."
       }
     };
 
     const modeButtons = document.querySelectorAll(".intent-button");
     const modeLabel = document.getElementById("modeLabel");
     const modeTitle = document.getElementById("modeTitle");
-    const modeDescription =
-      document.getElementById("modeDescription");
+    const modeDescription = document.getElementById("modeDescription");
 
     modeButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        modeButtons.forEach((item) =>
-          item.classList.remove("active")
-        );
+        modeButtons.forEach((item) => {
+          item.classList.remove("active");
+        });
 
         button.classList.add("active");
 
@@ -1523,8 +1468,7 @@
     });
 
     const thinkingForm = document.getElementById("thinkingForm");
-    const thinkingQuestion =
-      document.getElementById("thinkingQuestion");
+    const thinkingQuestion = document.getElementById("thinkingQuestion");
 
     thinkingForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -1537,13 +1481,13 @@
       }
 
       modeTitle.textContent =
-        "Before we search for an answer, what is your current hypothesis?";
+        "Прежде чем искать ответ, сформулируйте свою текущую гипотезу.";
 
       modeDescription.textContent =
-        "This is the Reflection Loop in action: the system asks you to make your thinking visible before it contributes its own response.";
+        "Так работает цикл рефлексии: система предлагает сделать ваше мышление видимым до того, как добавит собственный ответ.";
 
       thinkingQuestion.value = "";
-      thinkingQuestion.placeholder = "Write your first hypothesis";
+      thinkingQuestion.placeholder = "Напишите свою первую гипотезу";
       thinkingQuestion.focus();
     });
   </script>
